@@ -18,7 +18,10 @@ class ChangeThemeCell: BaseCell {
         changeTheme.theme_setTitleColor("ChangeThemeCell.buttonTitleColorNormal", forState: .normal)
         changeTheme.theme_setTitleColor("ChangeThemeCell.buttonTitleColorNormal", forState: .highlighted)
         changeTheme.theme_backgroundColor = "ChangeThemeCell.buttonBackgroundColor"
-        changeTheme.layer.cornerRadius = changeTheme.bounds.size.width / 2
+ //       changeTheme.layer.cornerRadius = changeTheme.bounds.size.width / 2
+        changeTheme.theme_cornerRadius = "ChangeThemeCell.cornerRadius"
+        changeTheme.theme_borderColor = "ChangeThemeCell.borderColor"
+        changeTheme.theme_borderWidth = "ChangeThemeCell.borderWidth"
     }
     
     @IBAction func tapChange(_ sender: UIButton) {

@@ -22,6 +22,18 @@ import UIKit
         get { return getThemePicker(self, "setTintColor:") as? ThemeColorPicker }
         set { setThemePicker(self, "setTintColor:", newValue) }
     }
+    var theme_borderColor: ThemeColorPicker? {
+        get { return getThemePicker(self.layer, "setBorderColor:") as? ThemeColorPicker }
+        set { setThemePicker(self.layer, "setBorderColor:", newValue) }
+    }
+    var theme_borderWidth: ThemeCGFloatPicker? {
+        get { return getThemePicker(self.layer, "setBorderWidth:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self.layer, "setBorderWidth:", newValue) }
+    }
+    var theme_cornerRadius: ThemeCGFloatPicker? {
+        get { return getThemePicker(self.layer, "setCornerRadius:") as? ThemeCGFloatPicker }
+        set { setThemePicker(self.layer, "setCornerRadius:", newValue) }
+    }
 }
 @objc public extension UIApplication
 {

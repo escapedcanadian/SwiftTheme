@@ -41,7 +41,6 @@ extension NSObject {
     
     func performThemePicker(selector: String, picker: ThemePicker?) {
         let sel = Selector(selector)
-        
         guard responds(to: sel)           else { return }
         guard let value = picker?.value() else { return }
         

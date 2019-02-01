@@ -38,6 +38,12 @@
 		<string>#AAA</string>
 		<key>buttonBackgroundColor</key>
 		<string>#ECF0F1</string>
+		<key>cornerRadius</key>
+		<integer>15</integer>
+		<key>borderColor</key>
+		<string>#00F</string>
+		<key>borderWidth</key>
+		<integer>5</integer>
 	</dict>
 </dict>
 </plist>
