@@ -15,7 +15,17 @@ import UIKit
             print("SwiftTheme WARNING: Possible recursive reference for: \(keyPath)")
             return nil
         }
-        let firstFound = currentTheme?.value(forKeyPath: keyPath)
+        var searchString: String?
+        if keyPath.hasPrefix("$") {
+            searchString = String(keyPath.dropFirst())
+        } else {
+            searchString = keyPath
+        }
+        guard searchString != nil else {
+            print("SwiftTheme WARNING: Did not find value at key path: \(keyPath)")
+            return nil
+        }
+        let firstFound = currentTheme?.value(forKeyPath: searchString!)
         if let firstFoundString = firstFound as? String {
             if firstFoundString.hasPrefix("$") {
                 return value(for: String(firstFoundString.dropFirst()), depth: (depth + 1))
@@ -26,7 +36,7 @@ import UIKit
     
     public class func string(for keyPath: String) -> String? {
         guard let string = ThemeManager.value(for: keyPath) as? String else {
-            print("SwiftTheme WARNING: Not found string key path: \(keyPath)")
+            print("SwiftTheme WARNING: Did not find a string at key path: \(keyPath)")
             return nil
         }
         return string
