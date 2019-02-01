@@ -96,17 +96,22 @@ import UIKit
             print("SwiftTheme WARNING: Did not find attributes dictionary at key path: \(keyPath)")
             return nil
         }
+        
+        return ThemeManager.textAttributes(from: rawAttributes as! [String: Any])
+    }
+    
+    public class func textAttributes(from rawAttributes: [String: Any]) -> [NSAttributedString.Key : AnyObject]? {
+
         var titleTextAttributes = [NSAttributedString.Key : AnyObject]()
-        for (key, value) in rawAttributes {
-            if let keyString = key as? String {
-                switch keyString {
+        for (keyString, value) in rawAttributes {
+               switch keyString {
                 case "foregroundColor":
                     if let colorString = value as? String {
                         if let color = color(for: colorString) {
                             titleTextAttributes[NSAttributedString.Key.foregroundColor] = color
                         }
                     } else {
-                        print("SwiftTheme WARNING: Could not decode foreground color from keyPath: \(keyPath)")
+                        print("SwiftTheme WARNING: Could not decode foreground color from source: \(String(describing: rawAttributes))")
                     }
                 case "backgroundColor":
                     if let colorString = value as? String {
@@ -114,7 +119,7 @@ import UIKit
                             titleTextAttributes[NSAttributedString.Key.backgroundColor] = color
                         }
                     } else {
-                        print("SwiftTheme WARNING: Could not decode background color from keyPath: \(keyPath))")
+                        print("SwiftTheme WARNING: Could not decode background color from source: \(String(describing: rawAttributes))")
                     }
               case "fontSize":
                     var fontSize: NSNumber?
@@ -125,14 +130,14 @@ import UIKit
                         fontSize = ThemeManager.number(for: fontString)
                     }
                     if fontSize == nil {
-                        print("SwiftTheme WARNING: Unable to detect font size from keyPath: \(keyPath))")
+                        print("SwiftTheme WARNING: Unable to detect font size from source: \(String(describing: rawAttributes))")
                     } else {
                         titleTextAttributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: CGFloat.init(truncating: fontSize!))
                     }
                 default:
-                    print("SwiftTheme WARNING: unrecognized text attribute key: \(key) at keyPath: \(keyPath)")
+                    print("SwiftTheme WARNING: unrecognized text attribute key: \(keyString) from source: \(String(describing: rawAttributes))")
                 }
-            }
+
         }
          return titleTextAttributes
     }
